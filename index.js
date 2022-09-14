@@ -25,7 +25,7 @@ const init = () => {
         {
             type: 'input',
             name: 'office',
-            message: 'Enter your office number.'
+            message: 'Enter your office number.' //this is returning undefined!!! nooo
         },
         {
             type: 'list',
@@ -42,16 +42,16 @@ const init = () => {
         res.officeNumber, )
         team.push(manager)
         console.log(team)
-    fs.writeFile('index.html', managerContent, (err)=>
+    fs.writeFile('index.html', 'manager', (err)=>
     err ? console.log(err) : console.log('')
     );
 
     if(res.team == 'Engineer') {
-            engineerPrompt();
+            engineerPrompt()
     } else { 
             if(res.team == 'Intern') {
-            internPrompt();
-    }};
+            internPrompt()
+        }} 
     })
 };
 
@@ -103,9 +103,15 @@ const engineerPrompt = () => {
             res.email, 
             res.github, )
             team.push(engineer)
-        fs.writeFile('index.html', engineerContent, (err)=>
+        fs.writeFile('index.html', 'engineer', (err)=>
         err ? console.log(err) : console.log('')
         );
+    if(res.team == 'Engineer') {
+            engineerPrompt()
+    } else { 
+            if(res.team == 'Intern') {
+            internPrompt()
+    }} 
     })
 };
 
@@ -156,9 +162,15 @@ const internPrompt = () => {
             res.email, 
             res.school, )
             team.push(intern)
-        fs.writeFile('index.html', internContent, (err)=>
+        fs.writeFile('index.html', 'intern', (err)=>
         err ? console.log(err) : console.log('')
         );
+    if(res.team == 'Engineer') {
+            engineerPrompt()
+    } else { 
+            if(res.team == 'Intern') {
+            internPrompt()
+    }}
     })
 };
 
@@ -174,12 +186,5 @@ return `<header>
     </div>`
 }
 
-
-// .then((answers) => {
-//     const managerContent = generateManager(res)
-//     fs.writeFile('index.html', managerContent, (err)=>
-//     err ? console.log(err) : console.log('')
-//     );
-// })
 
 init();
