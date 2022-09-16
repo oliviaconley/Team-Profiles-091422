@@ -1,0 +1,53 @@
+
+<!-- manager -->
+<link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <header>
+    <h1 class="hero text-center p-2">My Team</h1>
+    </header>
+
+<div class="d-inline-flex justify-content-start m-3">
+    <div class="card" style="width: 18rem;">
+        <h3 class="card-header">${answers.name} 
+        <p>Manager</p> 
+        </h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Email: <a href="${answers.email}">${answers.email}</a></li> 
+        <li class="list-group-item">ID: ${answers.id}</li>
+        <li class="list-group-item">Office number: ${answers.office}</li>
+    </ul>
+    </div>
+</div>
+    
+    <!-- Engineer -->
+<div class="d-inline-flex justify-content-start m-3">
+    <div class="card" style="width: 18rem;">
+        <h3 class="card-header">${answers.name} 
+        <p>Engineer</p> 
+        </h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${answers.id}</li>
+        <li class="list-group-item">Email: <a href="${answers.email}">${answers.email}</a></li>
+        <li class="list-group-item">GitHub: <a href="${answers.github}">${answers.github}</a></li>
+    </ul>
+    </div>
+</div>
+
+<!-- Intern -->
+<div class="d-inline-flex justify-content-start m-3">
+    <div class="card" style="width: 18rem;">
+        <h3 class="card-header">${answers.name} 
+        <p>Intern</p> 
+        </h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${answers.id}</li>
+        <li class="list-group-item">Email: <a href="${answers.email}">${answers.email}</a></li>
+        <li class="list-group-item">School: ${answers.school}</li>
+    </ul>
+    </div>
+</div>
+
+
+
+
+    

@@ -21,8 +21,8 @@ describe ("Employee class", () => {
 
     it ("getRole() should return 'Employee'", () => {
         const employeeEmail = "bluerose2595@gmail.com"
-        const newEmail = new Employee("Olivia", 5, employeeEmail)
-        expect(newEmail.getRole()).toEqual("Employee")
+        const newEmployee = new Employee("Olivia", 5, employeeEmail)
+        expect(newEmployee.getRole()).toEqual("Employee")
     })
 });
 

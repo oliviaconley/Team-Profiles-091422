@@ -9,8 +9,8 @@ describe ("Intern", () => {
     
     it ("getRole() should return 'Intern'", () => {
         const employeeId = 7;
-        const newId = new Intern("Olivia", employeeId, "bluerose2595@gmail.com", "Davidson College")
-        expect(newId.getId()).toEqual("Intern")
+        const newIntern = new Intern("Olivia", employeeId, "bluerose2595@gmail.com", "Davidson College")
+        expect(newIntern.getRole()).toEqual("Intern")
     })
 });
 

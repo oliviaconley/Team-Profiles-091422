@@ -1,190 +1,218 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
+const inquirer = require("inquirer");
+const fs = require("fs");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
-const team = []; 
+const team = [];
 
 const init = () => {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Please type your name.'
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter your employee id.'
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter your email address.'
-        },
-        {
-            type: 'input',
-            name: 'office',
-            message: 'Enter your office number.' //this is returning undefined!!! nooo
-        },
-        {
-            type: 'list',
-            name: 'team',
-            message: 'Who would you like to add to your team?',
-            choices: ['Engineer', 'Intern']
-            },
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Please type your name.",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter your employee id.",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email address.",
+      },
+      {
+        type: "input",
+        name: "officeNumber",
+        message: "Enter your office number.", 
+      },
+      {
+        type: "list",
+        name: "team",
+        message: "Who would you like to add to your team?",
+        choices: ["Engineer", "Intern"],
+      },
     ])
-    .then(function(res){
-    const manager = new Manager(
-        res.name, 
-        res.id, 
-        res.email, 
-        res.officeNumber, )
-        team.push(manager)
-        console.log(team)
-    fs.writeFile('index.html', 'manager', (err)=>
-    err ? console.log(err) : console.log('')
-    );
+    .then(function (res) {
+      const manager = new Manager(
+        res.name,
+        res.id,
+        res.email,
+        res.officeNumber
+      );
+      team.push(manager);
+      console.log(team);
 
-    if(res.team == 'Engineer') {
-            engineerPrompt()
-    } else { 
-            if(res.team == 'Intern') {
-            internPrompt()
-        }} 
-    })
+      fs.writeFile("index.html", generateManager(manager), (err) =>
+        err ? console.log(err) : console.log("")
+      );
+
+      if (res.team == "Engineer") {
+        engineerPrompt();
+      } else {
+        if (res.team == "Intern") {
+          internPrompt();
+        }
+      }
+    });
 };
 
 const generateManager = (answers) => {
-    return `<header>
-    <h1>My Team</h1>
-</header>
-    <div class='manager-card'>
-    <h2 class ='name'>${answers.name}</h2>
-    <h2 class ='manager'>Manager</h2>
-    <p class="email"><a href="mailto:${answers.email}">Email: ${answers.email} </p> 
-    <p class="id">ID: ${answers.id} </p>
-    <p class="office-num">Office number:${answers.office}</p>
-    </div>`
-}
+  return `<link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <header>
+    <h1 class="hero text-center p-2">My Team</h1>
+    </header>
+
+<div class="d-inline-flex justify-content-start m-3">
+    <div class="card" style="width: 18rem;">
+        <h3 class="card-header">${answers.name} 
+        <p>Manager</p> 
+        </h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Email: <a mailto:"${answers.email}">${answers.email}</a></li> 
+        <li class="list-group-item">ID: ${answers.id}</li>
+        <li class="list-group-item">Office number: ${answers.officeNumber}</li>
+    </ul>
+    </div>
+</div>`;
+};
+
 const engineerPrompt = () => {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Please type your name.'
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter your employee id.'
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter your email address.'
-        },
-        {
-            type: 'input',
-            name: 'github',
-            message: 'Enter your GitHub link.'
-        },
-        {
-            type: 'list',
-            name: 'team',
-            message: 'Who would you like to add to your team?',
-            choices: ['Engineer', 'Intern', 'Quit']
-        },
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Please type your name.",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter your employee id.",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email address.",
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "Enter your GitHub link.",
+      },
+      {
+        type: "list",
+        name: "team",
+        message: "Who would you like to add to your team?",
+        choices: ["Engineer", "Intern", "Quit"],
+      },
     ])
-    .then(function(res){
-        const engineer = new Engineer(
-            res.name, 
-            res.id, 
-            res.email, 
-            res.github, )
-            team.push(engineer)
-        fs.writeFile('index.html', 'engineer', (err)=>
-        err ? console.log(err) : console.log('')
-        );
-    if(res.team == 'Engineer') {
-            engineerPrompt()
-    } else { 
-            if(res.team == 'Intern') {
-            internPrompt()
-    }} 
-    })
+    .then(function (res) {
+      const engineer = new Engineer(res.name, res.id, res.email, res.github);
+      team.push(engineer);
+      console.log(team);
+      fs.appendFile("index.html", generateEngineer(engineer), (err) =>
+        err ? console.log(err) : console.log("")
+      );
+      if (res.team == "Engineer") {
+        engineerPrompt();
+      } else if (res.team == "Intern") {
+        internPrompt();
+      } else {
+        fs.appendFile("index.html", generateEngineer(engineer), (err) => {
+          if (res.team == "Quit") {
+            console.log("\nGoodbye!");
+            process.exit(0);
+          }
+          err ? console.log(err) : console.log("");
+        });
+      }
+    });
 };
 
 const generateEngineer = (answers) => {
-return `<header>
-    <h1>My Team</h1>
-</header>
-    <div class='engineer-card'>
-        <h2 class ='engineer'>Engineer</h2>
-        <p class="id">ID:${answers.id}</p>
-        <p class="email"><a href="mailto:${answers.email}">Email: ${answers.email}</p>
-        <p class="github"><a href="${answers.github}">GitHub:${answers.github}</p>
-    </div>`
-}
+  return `<div class="d-inline-flex justify-content-start m-3">
+  <div class="card" style="width: 18rem;">
+      <h3 class="card-header">${answers.name} 
+      <p>Engineer</p> 
+      </h3>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${answers.id}</li>
+      <li class="list-group-item">Email: <a mailto:"${answers.email}">${answers.email}</a></li>
+      <li class="list-group-item">GitHub: <a href="${answers.github}">${answers.github}</a></li>
+  </ul>
+  </div>
+</div>`;
+};
 const internPrompt = () => {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Please type your name.'
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter your employee id.'
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter your email address.'
-        },
-        {
-            type: 'input',
-            name: 'school',
-            message: 'Which school do you currently attend?'
-        },
-        {
-            type: 'list',
-            name: 'team',
-            message: 'Who would you like to add to your team?',
-            choices: ['Engineer', 'Intern', 'Quit']
-        },
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Please type your name.",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter your employee id.",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email address.",
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "Which school do you currently attend?",
+      },
+      {
+        type: "list",
+        name: "team",
+        message: "Who would you like to add to your team?",
+        choices: ["Engineer", "Intern", "Quit"],
+      },
     ])
-    .then(function(res){
-        const intern = new Intern(
-            res.name, 
-            res.id, 
-            res.email, 
-            res.school, )
-            team.push(intern)
-        fs.writeFile('index.html', 'intern', (err)=>
-        err ? console.log(err) : console.log('')
-        );
-    if(res.team == 'Engineer') {
-            engineerPrompt()
-    } else { 
-            if(res.team == 'Intern') {
-            internPrompt()
-    }}
-    })
+    .then(function (res) {
+      const intern = new Intern(res.name, res.id, res.email, res.school);
+      team.push(intern);
+      console.log(team);
+      fs.appendFile("index.html", generateIntern(intern), (err) =>
+        err ? console.log(err) : console.log("")
+      );
+      if (res.team == "Engineer") {
+        engineerPrompt();
+      } else if (res.team == "Intern") {
+        internPrompt();
+      } else {
+        fs.appendFile("index.html", generateEngineer(intern), (err) => {
+          if (res.team == "Quit") {
+            console.log("\nGoodbye!");
+            process.exit(0);
+          }
+          err ? console.log(err) : console.log("");
+        });
+      }
+    });
 };
 
 const generateIntern = (answers) => {
-return `<header>
-    <h1>My Team</h1>
-</header>
-    <div class='intern-card'>
-    <h2 class ='intern'>Intern</h2>
-    <p class="id">ID: ${anwers.id}</p>
-    <p class="email"><a href="mailto:${answers.email}">Email: ${answers.email}</p>
-    <p class="school">School: ${answers.school}</p>
-    </div>`
-}
-
+  return `<div class="d-inline-flex justify-content-start m-3">
+  <div class="card" style="width: 18rem;">
+      <h3 class="card-header">${answers.name} 
+      <p>Intern</p> 
+      </h3>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${answers.id}</li>
+      <li class="list-group-item">Email: <a mailto:"${answers.email}">${answers.email}</a></li>
+      <li class="list-group-item">School: ${answers.school}</li>
+  </ul>
+  </div>
+</div>`;
+};
 
 init();
