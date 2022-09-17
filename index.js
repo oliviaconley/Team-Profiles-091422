@@ -72,7 +72,7 @@ const generateManager = (answers) => {
         <p>Manager</p> 
         </h3>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Email: <a mailto:"${answers.email}">${answers.email}</a></li> 
+        <li class="list-group-item">Email: <a href= mailto:"${answers.email}">${answers.email}</a></li> 
         <li class="list-group-item">ID: ${answers.id}</li>
         <li class="list-group-item">Office number: ${answers.officeNumber}</li>
     </ul>
@@ -111,8 +111,8 @@ const engineerPrompt = () => {
       },
     ])
     .then(function (res) {
-      const engineer = new Engineer(res.name, res.id, res.email, res.github);
-      team.push(engineer);
+      const engineer = new Engineer(res.name, res.id, res.email, res.github); 
+      team.push(engineer); 
       console.log(team);
       fs.appendFile("index.html", generateEngineer(engineer), (err) =>
         err ? console.log(err) : console.log("")
@@ -141,12 +141,13 @@ const generateEngineer = (answers) => {
       </h3>
   <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${answers.id}</li>
-      <li class="list-group-item">Email: <a mailto:"${answers.email}">${answers.email}</a></li>
+      <li class="list-group-item">Email: <a href= mailto:"${answers.email}">${answers.email}</a></li>
       <li class="list-group-item">GitHub: <a href="${answers.github}">${answers.github}</a></li>
   </ul>
   </div>
 </div>`;
 };
+
 const internPrompt = () => {
   inquirer
     .prompt([
@@ -189,7 +190,7 @@ const internPrompt = () => {
       } else if (res.team == "Intern") {
         internPrompt();
       } else {
-        fs.appendFile("index.html", generateEngineer(intern), (err) => {
+        fs.appendFile("index.html", generateIntern(intern), (err) => {
           if (res.team == "Quit") {
             console.log("\nGoodbye!");
             process.exit(0);
@@ -208,7 +209,7 @@ const generateIntern = (answers) => {
       </h3>
   <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${answers.id}</li>
-      <li class="list-group-item">Email: <a mailto:"${answers.email}">${answers.email}</a></li>
+      <li class="list-group-item">Email: <a href= mailto:"${answers.email}">${answers.email}</a></li>
       <li class="list-group-item">School: ${answers.school}</li>
   </ul>
   </div>
