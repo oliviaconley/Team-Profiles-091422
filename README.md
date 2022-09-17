@@ -13,7 +13,7 @@ A command-line application built with Node.js that allows the user to input spec
 Simply run the application through an integrated terminal using the command “node index.js.” Npm and Jest should be installed prior to running the application. To run tests use the command 'npm run test' in the terminal. 
 
 ## Usage
-The user inputs the correct employee information pertaining to each of the prompts. When finished the app will automatically generate an HTML file displaying all of the employee cards input. See demonstration video here:
+The user inputs the correct employee information pertaining to each of the prompts. When finished the app will automatically generate an HTML file displaying all of the employee cards input. See demonstration video here: https://watch.screencastify.com/v/tFoYDvA9TOg3dMGeD1As 
 
 ## Learning Experience
 
